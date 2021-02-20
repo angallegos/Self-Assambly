@@ -7,7 +7,7 @@
 
 float x[1000], y[1000], z[1000]; 			/*Aquí se van a guardar las partículas*/ 
 float auxx,auxy,auxz,x2,y2,z2;
-int N=3;						/*Número de partículas*/
+int N=11;						/*Número de partículas*/
 float d=1;	
 float d2=2;	
 float d3=0.02;
@@ -92,7 +92,7 @@ float posiciones_inciales(){
 }
 
 int mover(){
-	parti=rand()%N+1;
+	parti=rand()%N;
 	auxx=x[parti];
 	auxy=y[parti];
 	auxz=z[parti];	
@@ -148,10 +148,7 @@ float distancia_minima(){
 	return rmin;
 }
 float min(){
-	if(deltaradio<aux1){
-		return deltaradio;
-	}
-		return aux1;
+	return (deltaradio<aux1?deltaradio:aux1); //Operador ternario
 }
 int escala(){
 	rmin=distancia_minima();
@@ -187,7 +184,7 @@ float potencial_final(){
 }
 int imprime_parametros(){
 	FILE *pa;
-	char salida[]="dat.dat";
+	char salida[]="dat11.dat";
 	pa=fopen(salida,"w");
 	fprintf(pa,"%i\n",N);
 	fprintf(pa,"%f\n",d);
@@ -202,10 +199,10 @@ int imprime_parametros(){
 }
 int escribe(){
 	FILE *pa;
-	char salida[]="dat.dat";
+	char salida[]="dat11.dat";
 	pa=fopen(salida,"a+");
 	fprintf(pa,"%f\n",R);
-	fprintf(pa,"%i\n",energia());
+	//fprintf(pa,"%i\n",energia());
 	for(l=0;l<N;l++){
 		fprintf(pa,"%f	%f	%f\n",x[l],y[l],z[l]);
 	}
